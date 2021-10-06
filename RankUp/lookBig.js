@@ -1,30 +1,18 @@
 function narcissistic(value) {
-    // Code me to return true or false
-    var str_digitos = value.toString();
-    var qtd_digitos = str_digitos.length;
-    var array_digitos = str_digitos.split('')
+    // Separar os digitos em um array
+    var arrayDigitos = Array.from(value.toString())
+
+    // map => vai fazer a potenciação de cada elemento do array
+    // reduce => vai fazer a soma desses elementos
+    var respostaFinal = arrayDigitos.map((digito) => {
+        return Math.pow(digito, arrayDigitos.length)
+    }).reduce((total,digito) => {
+        return total + digito
+    }, 0)
 
 
-    var array_digitos_convertidos = []
-    for(var i = 0; i < array_digitos.length; i++) {
-        array_digitos_convertidos.push( parseInt(array_digitos[i]))
-    }
-    
-    var array_digitos_expoente = []
-    for(var j = 0; j < array_digitos_convertidos.length; j++) {
-        var aux = Math.pow(array_digitos_convertidos[j], qtd_digitos)
-        array_digitos_expoente.push(aux)
-    }
-    
-    var total = array_digitos_expoente.reduce(function(total, digito){
-        return total + digito;
-    }, 0);
-
-    var respostaFinal = total == value
-
-    if(respostaFinal) return true
-    else return false
+    return (value == respostaFinal)
 }
 
 
-narcissistic(7);
+narcissistic(153);
